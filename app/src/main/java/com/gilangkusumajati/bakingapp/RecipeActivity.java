@@ -155,7 +155,7 @@ public class RecipeActivity extends AppCompatActivity
                 recipeAdapter.swapData(recipes);
                 showMessage(getString(R.string.data_loaded, recipes.size()));
 
-                // insert recipe with its ingredients to DB
+                // insert recipe with its ingredients and steps to DB
                 new AsyncTask<Void, Void, Void>() {
                     @Override
                     protected Void doInBackground(Void... params) {

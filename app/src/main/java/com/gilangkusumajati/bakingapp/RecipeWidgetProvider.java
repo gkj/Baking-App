@@ -60,14 +60,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_view);
         String recipeName = PreferenceUtil.getSelectedRecipeName(context);
         views.setTextViewText(R.id.title_text_view, context.getString(R.string.ingredient_of, recipeName));
-        // Set the IngredientListWidgetService intent to act as the adapter for the ListView
+
         Intent intent = new Intent(context, IngredientListWidgetService.class);
         views.setRemoteAdapter(R.id.widget_list_view, intent);
-        // Set the RecipeDetailActivity intent to launch when clicked
+
         Intent appIntent = new Intent(context, RecipeDetailActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_list_view, appPendingIntent);
-        // Handle empty gardens
+
         views.setEmptyView(R.id.widget_list_view, R.id.empty_view);
         return views;
     }
@@ -76,14 +76,14 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_list_view);
         String title = context.getString(R.string.recipes);
         views.setTextViewText(R.id.title_text_view, title);
-        // Set the IngredientListWidgetService intent to act as the adapter for the ListView
+
         Intent intent = new Intent(context, RecipeListWidgetService.class);
         views.setRemoteAdapter(R.id.widget_list_view, intent);
-        // Set the RecipeDetailActivity intent to launch when clicked
+
         Intent appIntent = new Intent(context, RecipeDetailActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_list_view, appPendingIntent);
-        // Handle empty gardens
+
         views.setEmptyView(R.id.widget_list_view, R.id.empty_view);
         return views;
     }
@@ -91,7 +91,6 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
     private static RemoteViews getEmptyRemoteView(Context context) {
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.empty_widget_view);
 
-        // Set the RecipeActivity intent to launch when clicked
         Intent appIntent = new Intent(context, RecipeActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.empty_widget_image_view, appPendingIntent);

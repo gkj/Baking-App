@@ -37,7 +37,6 @@ public class RecipeActivityScreenTest {
     private static final String RECIPE_NAME_CHEESECAKE = "Cheesecake";
 
     private static final String SAMPLE_INGREDIENT = "2.0 CUP Graham Cracker crumbs";
-    private static final String SAMPLE_STEP = "Recipe Introduction";
 
     @Rule
     public ActivityTestRule<RecipeActivity> mActivityTestRule

@@ -12,6 +12,7 @@
     <string name="authority_provider">com.gilangkusumajati.database.provider</string>
     <string name="data_loaded">%1$d data loaded.</string>
     <string name="ingredient_of">Ingredients of %1$s</string>
+    <string name="step_count">Step %1$d</string>
     <string name="recipe_selected">Ingredients of %1$s selected to be displayed on widget.</string>
     <string name="recipe_removed">Ingredients removed from widget.</string>
     <string name="appwidget_text">EXAMPLE</string>

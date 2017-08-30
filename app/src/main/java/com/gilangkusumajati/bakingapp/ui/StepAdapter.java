@@ -72,7 +72,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.ViewHolder> {
         }
 
         public void bind(@NonNull Step step) {
-            stepCount.setText(String.format("Step %s", getAdapterPosition()));
+            stepCount.setText(stepCount.getContext().getString(R.string.step_count, getAdapterPosition()));
             shortDescription.setText(step.getShortDescription());
         }
 

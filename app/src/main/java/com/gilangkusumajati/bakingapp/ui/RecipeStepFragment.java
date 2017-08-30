@@ -132,7 +132,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         unbinder = ButterKnife.bind(this, view);
 
         if (view.findViewById(R.id.textview_step_count) != null) {
-            stepCount.setText(String.format("Step %s", listIndex));
+            stepCount.setText(getString(R.string.step_count, listIndex));
             shortDescription.setText(step.getShortDescription());
             longDescription.setText(step.getDescription());
             prevButton.setEnabled(isPrevEnabled);
