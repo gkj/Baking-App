@@ -24,7 +24,43 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    androidTestCompile('com.android.support.test.espresso:espresso-intents:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    androidTestCompile('com.android.support.test:runner:0.3') {
+        // Necessary if your app targets Marshmallow (since the test runner
+        // hasn't moved to Marshmallow yet)
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test.espresso:espresso-contrib:2.2.2') {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'appcompat'
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    }
+    compile 'com.android.support.test.espresso:espresso-idling-resource:2.2.2'
+
+    compile "com.android.support:appcompat-v7:$support_version"
+    compile "com.android.support:recyclerview-v7:$support_version"
+    compile "com.android.support:cardview-v7:$support_version"
+    compile "com.android.support:preference-v7:$support_version"
+    compile "com.android.support:design:$support_version"
+    compile "com.android.support:support-v4:$support_version"
+    compile "com.android.support:support-v4:$support_version"
+    compile "com.squareup.picasso:picasso:$picasso_version"
+    compile "com.squareup.retrofit2:retrofit:$retrofit_version"
+    compile "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    compile "com.jakewharton:butterknife:$butterknife_version"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+    compile "com.jakewharton.timber:timber:$timber_version"
+    annotationProcessor "net.simonvt.schematic:schematic-compiler:$schematic_version"
+    compile "net.simonvt.schematic:schematic:$schematic_version"
+    compile "com.android.support.constraint:constraint-layout:1.0.2"
+    compile 'com.google.android.exoplayer:exoplayer:r2.2.0'
     testCompile 'junit:junit:4.12'
+
+
 }
