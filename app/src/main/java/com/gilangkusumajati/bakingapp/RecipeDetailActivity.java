@@ -1,26 +1,20 @@
 package com.gilangkusumajati.bakingapp;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.gilangkusumajati.bakingapp.model.Recipe;
-import com.gilangkusumajati.bakingapp.service.RecipeWidgetService;
 import com.gilangkusumajati.bakingapp.ui.RecipeDetailFragment;
 import com.gilangkusumajati.bakingapp.ui.RecipeStepFragment;
-import com.gilangkusumajati.bakingapp.util.PreferenceUtil;
 
 import java.util.ArrayList;
 
@@ -90,16 +84,6 @@ public class RecipeDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        if (PreferenceUtil.getSelectedRecipeId(this) == recipe.getRecipeId()) {
-            getMenuInflater().inflate(R.menu.widgetmenu, menu);
-        } else {
-            getMenuInflater().inflate(R.menu.recipemenu, menu);
-        }
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
@@ -113,14 +97,6 @@ public class RecipeDetailActivity extends AppCompatActivity
                     NavUtils.navigateUpTo(this, upIntent);
                 }
                 return true;
-            case R.id.action_display_in_widget:
-                displayIngredientsInWidget();
-                refreshOptionMenu();
-                break;
-            case R.id.action_remove_from_widget:
-                removeIngredientsFromWidget();
-                refreshOptionMenu();
-                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -184,35 +160,5 @@ public class RecipeDetailActivity extends AppCompatActivity
         fragmentManager.beginTransaction().
                 replace(R.id.recipe_step_content_view, recipeStepFragment)
                 .commit();
-    }
-
-    private void displayIngredientsInWidget() {
-        PreferenceUtil.setSelectedRecipeId(this, recipe.getRecipeId());
-        PreferenceUtil.setSelectedRecipeName(this, recipe.getName());
-        showMessage(getString(R.string.recipe_selected, recipe.getName()));
-        RecipeWidgetService.startActionUpdateWidgets(this);
-    }
-
-    private void removeIngredientsFromWidget() {
-        PreferenceUtil.setSelectedRecipeId(this, PreferenceUtil.NO_ID);
-        PreferenceUtil.setSelectedRecipeName(this, PreferenceUtil.NO_NAME);
-        showMessage(getString(R.string.recipe_removed));
-        RecipeWidgetService.startActionUpdateWidgets(this);
-    }
-
-    private void showMessage(@NonNull String message) {
-        Snackbar snackbar = Snackbar
-                .make(isTwoPane ? layoutRoot : container, message, Snackbar.LENGTH_LONG);
-        snackbar.show();
-    }
-
-    private void refreshOptionMenu() {
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                invalidateOptionsMenu();
-            }
-        }, 500);
     }
 }

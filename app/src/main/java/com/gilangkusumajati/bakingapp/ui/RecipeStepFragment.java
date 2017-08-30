@@ -86,6 +86,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
 
     private Unbinder unbinder;
     private StepActionListener stepActionListener;
+    private TrackSelector trackSelector;
     private SimpleExoPlayer exoPlayer;
 
     public RecipeStepFragment() {
@@ -111,7 +112,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
         outState.putParcelable(EXTRA_STEP, step);
         outState.putBoolean(EXTRA_PREV_ENABLED, isPrevEnabled);
         outState.putBoolean(EXTRA_NEXT_ENABLED, isNextEnabled);
-        outState.putLong(EXTRA_EXO_PLAYER_POSITION, exoPlayer != null ? exoPlayer.getCurrentPosition() : 0);
+        outState.putLong(EXTRA_EXO_PLAYER_POSITION,position);
     }
 
     @Override
@@ -161,9 +162,15 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        position = exoPlayer != null ? exoPlayer.getCurrentPosition() : 0;
+        releasePlayer();
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
-        releasePlayer();
         if (unbinder != null) {
             unbinder.unbind();
             unbinder = null;
@@ -173,7 +180,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
     private void initializePlayer(Uri mediaUri) {
         if (exoPlayer == null) {
             // Create an instance of the ExoPlayer.
-            TrackSelector trackSelector = new DefaultTrackSelector();
+            trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             exoPlayer = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
             playerView.setPlayer(exoPlayer);
@@ -198,6 +205,7 @@ public class RecipeStepFragment extends Fragment implements ExoPlayer.EventListe
             exoPlayer.stop();
             exoPlayer.release();
             exoPlayer = null;
+            trackSelector = null;
         }
     }
 

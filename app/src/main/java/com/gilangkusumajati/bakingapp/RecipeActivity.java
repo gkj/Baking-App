@@ -27,6 +27,7 @@ import com.gilangkusumajati.bakingapp.util.DBUtil;
 import com.gilangkusumajati.bakingapp.model.Recipe;
 import com.gilangkusumajati.bakingapp.api.RecipeAPIClient;
 import com.gilangkusumajati.bakingapp.ui.RecipeAdapter;
+import com.gilangkusumajati.bakingapp.util.PreferenceUtil;
 import com.gilangkusumajati.bakingapp.util.SimpleIdlingResource;
 
 import java.io.IOException;
@@ -183,6 +184,10 @@ public class RecipeActivity extends AppCompatActivity
 
     @Override
     public void onRecipeItemClick(Recipe recipe) {
+        PreferenceUtil.setSelectedRecipeId(this, recipe.getRecipeId());
+        PreferenceUtil.setSelectedRecipeName(this, recipe.getName());
+        RecipeWidgetService.startActionUpdateWidgets(this);
+
         Intent intent = new Intent(this, RecipeDetailActivity.class);
         intent.putExtra(EXTRA_RECIPE, recipe);
         startActivity(intent);
