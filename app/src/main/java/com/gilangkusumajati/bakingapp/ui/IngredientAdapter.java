@@ -63,13 +63,13 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
         @BindView(R.id.textview_ingredient_summary)
         TextView ingredientSummary;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void bind(@NonNull Ingredient ingredient) {
+        private void bind(@NonNull Ingredient ingredient) {
             int backgroundColor = getAdapterPosition() % 2 == 0 ? R.color.background1 : R.color.background2;
             layoutRoot.setBackgroundColor(ContextCompat.getColor(layoutRoot.getContext(), backgroundColor));
             ingredientSummary.setText(ingredient.toString());

@@ -69,13 +69,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         @BindView(R.id.textview_recipe_name)
         TextView recipeName;
 
-        public ViewHolder(View itemView) {
+        private ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
-        public void bind(@NonNull Recipe recipe) {
+        private void bind(@NonNull Recipe recipe) {
             if (!TextUtils.isEmpty(recipe.getImage())) {
                 Picasso.with(recipeName.getContext()).load(recipe.getImage()).into(image);
             }

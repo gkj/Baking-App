@@ -80,7 +80,9 @@ public class RecipeDetailActivity extends AppCompatActivity
             setTitle(recipe.getName());
         }
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

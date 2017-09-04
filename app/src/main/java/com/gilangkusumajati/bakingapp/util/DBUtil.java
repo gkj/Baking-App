@@ -234,9 +234,9 @@ public class DBUtil {
             if (cursor != null) {
                 cursor.close();
             }
-
-            return ingredients;
         }
+
+        return ingredients;
     }
 
     public static int insertSteps(@NonNull ContentResolver contentResolver, @NonNull List<Step> steps, int recipeId) {
@@ -290,8 +290,8 @@ public class DBUtil {
             if (cursor != null) {
                 cursor.close();
             }
-
-            return steps;
         }
+
+        return steps;
     }
 }

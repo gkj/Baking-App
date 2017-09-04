@@ -69,11 +69,13 @@ public class RecipeDetailFragment extends Fragment
 
         ingredientRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         ingredientRecyclerView.setHasFixedSize(true);
+        ingredientRecyclerView.setNestedScrollingEnabled(false);
         ingredientAdapter = new IngredientAdapter(this);
         ingredientRecyclerView.setAdapter(ingredientAdapter);
 
         stepRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         stepRecyclerView.setHasFixedSize(true);
+        stepRecyclerView.setNestedScrollingEnabled(false);
         stepAdapter = new StepAdapter(this);
         stepRecyclerView.setAdapter(stepAdapter);
 

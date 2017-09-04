@@ -33,11 +33,15 @@ public class RecipeStepActivity extends AppCompatActivity
 
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             requestWindowFeature(Window.FEATURE_NO_TITLE);
-            getSupportActionBar().hide();
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().hide();
+            }
         } else {
-            getSupportActionBar().show();
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            if (getSupportActionBar() != null) {
+                getSupportActionBar().show();
+            }
         }
 
         setContentView(R.layout.activity_recipe_step);
